@@ -27,7 +27,7 @@ class TeamNameHandler(VanillaHandler):
         info = super().parse_server_stdout(text)
         if info.player is None:
             m = re.fullmatch(self.regular_expression, info.content)
-            if m is not None and (not self._skip_name_check or self._verify_player_name(m['name'])):
+            if m is not None and (self._skip_name_check or self._verify_player_name(m['name'])):
                 info.player, info.content = m['name'], m['message']
         return info
 
