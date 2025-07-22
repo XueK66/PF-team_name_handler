@@ -1,0 +1,56 @@
+name: Release Team Name Handler
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Create package
+        run: |
+          mkdir -p dist
+          TAG_NAME=${GITHUB_REF##*/}
+          zip -r dist/team_name_handler-${TAG_NAME}.mcdr src
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "Release ${GITHUB_REF##*/}"
+          body: "Automated release for ${GITHUB_REF##*/}"
+          branch: release/${GITHUB_REF##*/}
+          commit-message: "chore: package for ${GITHUB_REF##*/}"
+          add-paths: dist/team_name_handler-${GITHUB_REF##*/}.mcdr
+
+  release:
+    needs: package
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        run: |
+          TAG_NAME=${GITHUB_REF##*/}
+          cp dist/team_name_handler-${TAG_NAME}.mcdr .
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          files: team_name_handler-${{ github.ref_name }}.mcdr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
