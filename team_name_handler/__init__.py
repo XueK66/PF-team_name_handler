@@ -1,0 +1,1 @@
+from team_name_handler.handler import on_load
