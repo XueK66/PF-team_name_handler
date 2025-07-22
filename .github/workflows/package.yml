@@ -1,0 +1,53 @@
+name: Package on Commit
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create zip package
+        run: |
+          zip -r team_name_handler.mcdr . -x ".git/*" ".github/*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: team_name_handler.mcdr
+          path: team_name_handler.mcdr
+
+          create-pr:
+            needs: package
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v4
+
+              - name: Create Pull Request
+                uses: peter-evans/create-pull-request@v5
+                with:
+                  title: "Release: team_name_handler.mcdr package"
+                  body: "Automated PR to release new package version."
+                  branch: release/team_name_handler
+                  commit-message: "chore: package team_name_handler.mcdr"
+
+          release:
+            needs: create-pr
+            runs-on: ubuntu-latest
+            if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v4
+
+              - name: Create Release
+                uses: softprops/action-gh-release@v1
+                with:
+                  name: "Release team_name_handler.mcdr"
+                  tag_name: "v${{ github.run_number }}"
+                  files: team_name_handler.mcdr
