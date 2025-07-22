@@ -29,10 +29,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create Pull Request using GitHub CLI
-        run: gh pr create --base base_branch --head branch_to_merge --title "Merge branch_to_merge into base_branch" --body "Created by GitHub action"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          base: base_branch
+          branch: branch_to_merge
+          title: "Merge branch_to_merge into base_branch"
+          body: "Created by GitHub action"
 
   release:
     needs: create-pr
