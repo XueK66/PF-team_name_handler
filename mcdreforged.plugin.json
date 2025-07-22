@@ -1,0 +1,14 @@
+{
+	"id": "team_name_handler",
+	"version": "1.0.0",
+	"name": "Team Name Handler",
+	"description": {
+		"en_us": "Handler Team Names Prefixes and Suffixes",
+		"zh_cn": "处理队伍名称的前后缀"
+	},
+	"author": [
+		"XueK__"
+	],
+	"link": "https://github.com/XueK66/PF-team_name_handler",
+	"dependencies": {}
+}
