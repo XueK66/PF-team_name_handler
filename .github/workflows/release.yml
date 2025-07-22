@@ -21,17 +21,13 @@ jobs:
       - name: Create package
         run: |
           mkdir -p dist
-          TAG_NAME=${GITHUB_REF##*/}
-          zip -r dist/team_name_handler-${TAG_NAME}.mcdr src
+          zip -r dist/team_name_handler-${{ github.ref_name }}.mcdr src
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          title: "Release ${GITHUB_REF##*/}"
-          body: "Automated release for ${GITHUB_REF##*/}"
-          branch: release/${GITHUB_REF##*/}
-          commit-message: "chore: package for ${GITHUB_REF##*/}"
-          add-paths: dist/team_name_handler-${GITHUB_REF##*/}.mcdr
+          name: package
+          path: dist/team_name_handler-${{ github.ref_name }}.mcdr
 
   release:
     needs: package
@@ -42,9 +38,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download artifact
-        run: |
-          TAG_NAME=${GITHUB_REF##*/}
-          cp dist/team_name_handler-${TAG_NAME}.mcdr .
+        uses: actions/download-artifact@v4
+        with:
+          name: package
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
