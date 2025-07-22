@@ -1,10 +1,10 @@
 ![PF-team_name_handler](https://socialify.git.ci/XueK66/PF-team_name_handler/image?issues=1&language=1&name=1&stargazers=1&theme=Light)
 # Team Name Handler for MCDReforged
 
-[![仓库大小](https://img.shields.io/github/repo-size/XueK66/PF-team_name_handle?style=flat-square&label=仓库占用)](/)
-[![最新版](https://img.shields.io/github/v/release/XueK66/PF-team_name_handle?style=flat-square&label=最新版)](https://github.com/XueK66/PF-team_name_handler/releases/latest)
-[![总下载量](https://img.shields.io/github/downloads/XueK66/PF-team_name_handle/total?style=flat-square&label=下载量)](https://github.com/XueK66/PF-team_name_handler/releases)
-[![最新发布下载量](https://img.shields.io/github/downloads/XueK66/PF-team_name_handle/latest/total?style=flat-square&label=最新版本下载量)](https://github.com/XueK66/PF-team_name_handler/releases/latest)
+[![仓库大小](https://img.shields.io/github/repo-size/XueK66/PF-team_name_handler?style=flat-square&label=仓库占用)](/)
+[![最新版](https://img.shields.io/github/v/release/XueK66/PF-team_name_handler?style=flat-square&label=最新版)](https://github.com/XueK66/PF-team_name_handler/releases/latest)
+[![总下载量](https://img.shields.io/github/downloads/XueK66/PF-team_name_handler/total?style=flat-square&label=下载量)](https://github.com/XueK66/PF-team_name_handler/releases)
+[![最新发布下载量](https://img.shields.io/github/downloads/XueK66/PF-team_name_handler/latest/total?style=flat-square&label=最新版本下载量)](https://github.com/XueK66/PF-team_name_handler/releases/latest)
 
 #### 插件简介
 **Team Name Handler** 是一款为 MCDReforged (MCDR) 开发的信息处理器，用于正确解析带队伍名前缀的玩家名称。
