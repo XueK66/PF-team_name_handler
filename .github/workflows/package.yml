@@ -35,7 +35,7 @@ jobs:
           title: "Release: team_name_handler.mcdr package"
           body: "Automated PR to release new package version."
           branch: release/team_name_handler
-          commit-message: "chore: package team_name_handler.mcdr"
+        commit-message: "chore: package team_name_handler.mcdr"
 
   release:
     needs: create-pr
