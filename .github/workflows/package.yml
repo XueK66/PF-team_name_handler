@@ -29,13 +29,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          title: "Release: team_name_handler.mcdr package"
-          body: "Automated PR to release new package version."
-          branch: release/team_name_handler
-        commit-message: "chore: package team_name_handler.mcdr"
+      - name: Create Pull Request using GitHub CLI
+        run: gh pr create --base base_branch --head branch_to_merge --title "Merge branch_to_merge into base_branch" --body "Created by GitHub action"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     needs: create-pr
